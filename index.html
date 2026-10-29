@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rasan — Setting New Standards in Dairy</title>
+  <meta name="description" content="Rasan Dairy, a Halabja Group company — yogurt, cheese, ayran, labneh, olive oil and more, from our local farms to your table." />
+  <link rel="icon" href="logos/rasan.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo" aria-label="Rasan">
+    <img class="logo-light" src="logos/rasan-white.svg" alt="Rasan" />
+    <img class="logo-dark" src="logos/rasan.svg" alt="Rasan" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products" data-i18n="nav_products">Products</a></li>
+    <li><a href="#journey" data-i18n="nav_journey">Farm to Table</a></li>
+    <li><a href="#about" data-i18n="nav_about">About</a></li>
+    <li><a href="#recipes" data-i18n="nav_recipes">Recipes</a></li>
+    <li><a href="#voices" data-i18n="nav_voices">Testimonials</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="ku">کوردی</button>
+      <button class="lang-btn" data-lang="ar">عربي</button>
+    </div>
+    <a href="#contact" class="btn btn-sky nav-cta" data-i18n="nav_contact">Contact</a>
+    <button class="hamburger" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <img src="logos/rasan-white.svg" alt="Rasan" />
+    <button class="mobile-close" id="menuClose" aria-label="Close">✕</button>
+  </div>
+  <div class="mobile-nav">
+    <a href="#products" data-i18n="nav_products">Products</a>
+    <a href="#journey" data-i18n="nav_journey">Farm to Table</a>
+    <a href="#about" data-i18n="nav_about">About</a>
+    <a href="#recipes" data-i18n="nav_recipes">Recipes</a>
+    <a href="#voices" data-i18n="nav_voices">Testimonials</a>
+    <a href="#contact" data-i18n="nav_contact">Contact</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="ku">کوردی</button>
+    <button class="lang-btn" data-lang="ar">عربي</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <video autoplay muted loop playsinline preload="auto" aria-label="From our local farms to your table.">
+      <source src="assets/video/hero.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="hero-shade"></div>
+
+  <div class="hero-content fade-up">
+    <img class="hero-logo" src="logos/rasan-ku-white.svg" alt="ڕاسان" />
+    <h1 class="hero-title">
+      <span data-i18n="hero_h1">Setting new</span>
+      <strong><span data-i18n="hero_h2">standards in</span> <em data-i18n="hero_h3">dairy</em></strong>
+    </h1>
+    <p class="hero-desc" data-i18n="hero_desc">From our local farms in Halabja to your table — fresh yogurt, cheese, ayran, labneh and cold-pressed olive oil, made the natural way.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn btn-sky" data-i18n="hero_btn1">Explore Products</a>
+      <a href="#journey" class="btn btn-ghost" data-i18n="hero_btn2">Our Journey</a>
+    </div>
+  </div>
+
+  <div class="hero-stats fade-up" style="transition-delay:.3s">
+    <div class="stat-card"><div class="stat-num"><span data-count="100">0</span><sup>%</sup></div><div class="stat-label" data-i18n="stat1">Natural products</div></div>
+    <div class="stat-card"><div class="stat-num"><span data-count="10">0</span><sup>K m²</sup></div><div class="stat-label" data-i18n="stat2">Green feed area</div></div>
+    <div class="stat-card"><div class="stat-num"><span data-count="35">0</span><sup>+</sup></div><div class="stat-label" data-i18n="stat3">Product variations</div></div>
+    <div class="stat-card"><div class="stat-num"><span data-count="2">0</span></div><div class="stat-label" data-i18n="stat4">Cow &amp; goat farms</div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrapper"><div class="marquee-track" id="marquee"></div></div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="products-head fade-up">
+    <div>
+      <span class="section-tag" data-i18n="prod_tag">Our Products</span>
+      <h2 class="section-title"><span data-i18n="prod_h1">Made fresh,</span> <strong data-i18n="prod_h2">made local</strong></h2>
+    </div>
+    <div class="filters" id="filters"></div>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="journey-head fade-up">
+    <span class="section-tag" data-i18n="jr_tag">Farm to Table</span>
+    <h2 class="section-title"><span data-i18n="jr_h1">Every drop has</span> <strong data-i18n="jr_h2">a journey</strong></h2>
+    <p class="section-lead" style="margin-top:16px" data-i18n="jr_lead">Scroll to follow the milk — from our herds in Halabja, through our collection network and eco-friendly factory, to your breakfast.</p>
+  </div>
+  <div class="journey-stage" id="journeyStage">
+    <svg class="journey-path" viewBox="0 0 1200 420" preserveAspectRatio="none" aria-hidden="true">
+      <path class="track" id="jTrack" d="M90 300 C200 300 230 120 330 120 C450 120 480 300 600 300 C720 300 760 120 870 120 C990 120 1030 280 1140 280"/>
+      <path class="draw" id="jDraw" d="M90 300 C200 300 230 120 330 120 C450 120 480 300 600 300 C720 300 760 120 870 120 C990 120 1030 280 1140 280"/>
+      <circle class="milk-drop" id="jDrop" r="7" cx="90" cy="300"/>
+    </svg>
+    <div class="station" style="left:7.5%;top:71.4%">
+      <div class="station-ico"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14l-5-4M36 14l5-4"/><path d="M14 13h20a4 4 0 0 1 4 4v8c0 7-6 13-14 13S10 32 10 25v-8a4 4 0 0 1 4-4z"/><ellipse cx="24" cy="31" rx="7" ry="4.5"/><circle cx="21.5" cy="31" r=".6" fill="currentColor"/><circle cx="26.5" cy="31" r=".6" fill="currentColor"/><circle cx="18" cy="21" r="1" fill="currentColor"/><circle cx="30" cy="21" r="1" fill="currentColor"/></svg></div>
+      <div class="station-text"><div class="station-step">01</div><div class="station-name" data-i18n="st1">Rasan Cow Farm</div><div class="station-desc" data-i18n="st1d">Healthy herds raised on green feed grown on our own land.</div></div>
+    </div>
+    <div class="station" style="left:27.5%;top:28.6%">
+      <div class="station-ico"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 10c-4-1-7 1-8 4M31 10c4-1 7 1 8 4"/><path d="M16 14c0-2 3.5-4 8-4s8 2 8 4l-1 14c0 5-3 9-7 9s-7-4-7-9z"/><path d="M21 37l3 4 3-4"/><circle cx="20" cy="21" r="1" fill="currentColor"/><circle cx="28" cy="21" r="1" fill="currentColor"/></svg></div>
+      <div class="station-text"><div class="station-step">02</div><div class="station-name" data-i18n="st2">Rasan Goat Farm</div><div class="station-desc" data-i18n="st2d">Goat milk for our creamy cheeses and specialty milk.</div></div>
+    </div>
+    <div class="station" style="left:50%;top:71.4%">
+      <div class="station-ico"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6h12M19 6v6l-5 6v20a4 4 0 0 0 4 4h12a4 4 0 0 0 4-4V18l-5-6V6"/><path d="M14 26h20"/></svg></div>
+      <div class="station-text"><div class="station-step">03</div><div class="station-name" data-i18n="st3">Milk Collection</div><div class="station-desc" data-i18n="st3d">Chilled stations gather milk from local farmers every morning.</div></div>
+    </div>
+    <div class="station" style="left:72.5%;top:28.6%">
+      <div class="station-ico"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 40V22l10 6v-6l10 6V12h8v28z"/><path d="M6 40h36"/><path d="M36 8c3 0 6 2 6 6-3 0-6-2-6-6z"/><path d="M33 16v-4"/></svg></div>
+      <div class="station-text"><div class="station-step">04</div><div class="station-name" data-i18n="st4">Eco-friendly Factory</div><div class="station-desc" data-i18n="st4d">Modern, clean production in Halabja, built to respect the land.</div></div>
+    </div>
+    <div class="station" style="left:95%;top:66.7%">
+      <div class="station-ico"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="26" r="12"/><circle cx="24" cy="26" r="6"/><path d="M5 12v10a3 3 0 0 0 3 3v14M5 12v6M11 12v10a3 3 0 0 1-3 3M43 12c-3 2-4 6-4 11h4v16"/></svg></div>
+      <div class="station-text"><div class="station-step">05</div><div class="station-name" data-i18n="st5">Your Table</div><div class="station-desc" data-i18n="st5d">Fresh to stores across Kurdistan and Iraq — straight to your breakfast.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual fade-up">
+    <div class="about-blob"></div>
+    <img class="a2" src="assets/products/premium-labneh.png" alt="Rasan premium labneh" />
+    <img class="a1" src="assets/products/goat-milk.png" alt="Rasan goat milk" />
+    <img class="a3" src="assets/products/braided-cheese.png" alt="Rasan braided cheese" />
+    <div class="about-badge"><div class="about-badge-num">35+</div><div class="about-badge-txt" data-i18n="about_badge">Products, one promise</div></div>
+  </div>
+  <div class="about-content fade-up" style="transition-delay:.1s">
+    <span class="section-tag" data-i18n="about_tag">Who We Are</span>
+    <h2 class="section-title"><span data-i18n="about_h1">Rooted in Halabja,</span> <strong data-i18n="about_h2">pure by nature</strong></h2>
+    <p class="section-lead about-body" data-i18n="about_body">Rasan is the dairy and food brand of Halabja Group. We pair traditional recipes with modern, hygienic production — and we buy from local farmers, so every jar of yogurt and every bottle of olive oil supports the region that made it.</p>
+    <div class="about-values">
+      <div class="value-item"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7c3.6 4.2 6 7.6 6 11a6 6 0 0 1-12 0c0-3.4 2.4-6.8 6-11z"/></svg></div><div class="value-name" data-i18n="v1">Natural</div><div class="value-desc" data-i18n="v1d">No shortcuts — real milk, real olives, real taste.</div></div>
+      <div class="value-item"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-6 7 6v11"/><path d="M9 21v-6h6v6"/></svg></div><div class="value-name" data-i18n="v2">Local</div><div class="value-desc" data-i18n="v2d">Sourced from our farms and neighbouring farmers.</div></div>
+      <div class="value-item"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg></div><div class="value-name" data-i18n="v3">Fresh</div><div class="value-desc" data-i18n="v3d">Collected each morning, chilled from farm to shelf.</div></div>
+      <div class="value-item"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.2-6"/></svg></div><div class="value-name" data-i18n="v4">Sustainable</div><div class="value-desc" data-i18n="v4d">An environment-friendly factory and green feed fields.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RECIPES -->
+<section id="recipes">
+  <div class="recipes-head fade-up">
+    <div>
+      <span class="section-tag" data-i18n="rc_tag">Recipes</span>
+      <h2 class="section-title"><span data-i18n="rc_h1">Breakfast,</span> <strong data-i18n="rc_h2">the Rasan way</strong></h2>
+    </div>
+    <p class="section-lead" data-i18n="rc_lead">Simple, traditional dishes that let fresh dairy and good olive oil shine.</p>
+  </div>
+  <div class="recipe-grid">
+    <article class="recipe fade-up">
+      <div class="recipe-art"><div class="plate"></div><img src="assets/products/fresh-cheese.png" alt="" /><img class="side" src="assets/products/olive-oil-extra-virgin.png" alt="" /></div>
+      <div>
+        <div class="recipe-meta"><span>⏱ <b data-i18n="rc_min">10 min</b></span><span>🍽 <b data-i18n="rc_serves">Serves 4</b></span></div>
+        <h3 data-i18n="rc1">Cheese &amp; Olive Oil Breakfast</h3>
+        <p data-i18n="rc1d">Fresh white cheese, a drizzle of extra virgin olive oil, herbs, tomatoes and warm bread — an Iraqi morning classic.</p>
+        <a href="#recipes" class="recipe-link" data-i18n="rc_read">Read recipe</a>
+      </div>
+    </article>
+    <article class="recipe fade-up" style="transition-delay:.1s">
+      <div class="recipe-art"><div class="plate"></div><img src="assets/products/qeymar-rewag.png" alt="" /></div>
+      <div>
+        <div class="recipe-meta"><span>⏱ <b data-i18n="rc_min">10 min</b></span><span>🍽 <b data-i18n="rc_serves">Serves 4</b></span></div>
+        <h3 data-i18n="rc2">Kahi with Qaymar</h3>
+        <p data-i18n="rc2d">Flaky kahi pastry topped with thick Rasan qaymar and a ribbon of syrup — the ultimate weekend treat.</p>
+        <a href="#recipes" class="recipe-link" data-i18n="rc_read">Read recipe</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section id="voices">
+  <div class="voices-head recipes-head fade-up">
+    <div>
+      <span class="section-tag" data-i18n="vo_tag">Testimonials</span>
+      <h2 class="section-title"><span data-i18n="vo_h1">What people</span> <strong data-i18n="vo_h2">say about Rasan</strong></h2>
+    </div>
+    <div class="voices-nav"><button id="vPrev" aria-label="Previous">←</button><button id="vNext" aria-label="Next">→</button></div>
+  </div>
+  <div class="voices-track" id="voicesTrack">
+    <div class="voice"><div class="voice-q">“</div><p data-i18n="q1">The olive oil has the fresh, peppery character I look for. I cook with it every day in my kitchen.</p><div class="voice-who"><div class="voice-av">C</div><div><div class="voice-role" data-i18n="q1r">Chef</div><div class="voice-sub" data-i18n="q1s">Professional kitchen</div></div></div></div>
+    <div class="voice"><div class="voice-q">“</div><p data-i18n="q2">Having a factory like this in Halabja means jobs for our young people and products we are proud of.</p><div class="voice-who"><div class="voice-av">H</div><div><div class="voice-role" data-i18n="q2r">Local resident</div><div class="voice-sub" data-i18n="q2s">Halabja</div></div></div></div>
+    <div class="voice"><div class="voice-q">“</div><p data-i18n="q3">Rasan's work with olive seedlings is helping farmers plant for the future of the region.</p><div class="voice-who"><div class="voice-av">D</div><div><div class="voice-role" data-i18n="q3r">Horticulture director</div><div class="voice-sub" data-i18n="q3s">Agriculture sector</div></div></div></div>
+    <div class="voice"><div class="voice-q">“</div><p data-i18n="q4">Buying olives directly from our farmers keeps the local economy alive. It is a blessing for many families.</p><div class="voice-who"><div class="voice-av">S</div><div><div class="voice-role" data-i18n="q4r">Religious scholar</div><div class="voice-sub" data-i18n="q4s">Community voice</div></div></div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band fade-up" id="contact">
+  <div>
+    <h2><span data-i18n="cta_h1">Stay updated with</span> <strong data-i18n="cta_h2">our latest news</strong></h2>
+    <p data-i18n="cta_p">New products, recipes and stories from our farms — straight to your inbox.</p>
+  </div>
+  <div>
+    <form class="newsletter" id="newsletter">
+      <input type="email" required placeholder="you@email.com" aria-label="Email" />
+      <button class="btn btn-navy" type="submit" data-i18n="cta_btn">Subscribe</button>
+    </form>
+    <div class="newsletter-note" id="newsletterNote"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="logos/rasan-white.svg" alt="Rasan" />
+      <p data-i18n="ft_about">From our local farms to your table. Rasan is a proud member of Halabja Group.</p>
+      <div class="socials">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.5V11H7v4h3v9h4v-9h3l1-4h-4V8.6c0-.4.3-.6.6-.6z"/></svg></a>
+        <a href="https://www.instagram.com/rasan.ku/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+        <a href="https://www.tiktok.com/@rasan.ku" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.4 2.4 1.9 4 4.5 4.2v3.4c-1.6 0-3.1-.5-4.4-1.3v6.3A6.1 6.1 0 1 1 10 9.5v3.5a2.7 2.7 0 1 0 2.6 2.7V3z"/></svg></a>
+        <a href="https://www.youtube.com/@Rasan-ku" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 8.2a3 3 0 0 0-2.1-2.1C18 5.6 12 5.6 12 5.6s-6 0-7.9.5A3 3 0 0 0 2 8.2 31 31 0 0 0 1.6 12c0 1.3.1 2.6.4 3.8a3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1c.3-1.2.4-2.5.4-3.8s-.1-2.6-.4-3.8zM10 15V9l5.2 3z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h4 data-i18n="ft_products">Products</h4>
+      <ul id="footerCats"></ul>
+    </div>
+    <div>
+      <h4 data-i18n="ft_company">Company</h4>
+      <ul>
+        <li><a href="#about" data-i18n="ft_who">Who we are</a></li>
+        <li><a href="#journey" data-i18n="st1">Rasan Cow Farm</a></li>
+        <li><a href="#journey" data-i18n="st2">Rasan Goat Farm</a></li>
+        <li><a href="#journey" data-i18n="st3">Milk Collection</a></li>
+        <li><a href="#journey" data-i18n="st4">Eco-friendly Factory</a></li>
+        <li><a href="https://mazedevelopment11.github.io/halabja-group/careers.html" data-i18n="ft_careers">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-i18n="ft_explore">Explore</h4>
+      <ul>
+        <li><a href="#recipes" data-i18n="nav_recipes">Recipes</a></li>
+        <li><a href="#voices" data-i18n="nav_voices">Testimonials</a></li>
+        <li><a href="https://mazedevelopment11.github.io/halabja-group/news.html" data-i18n="ft_news">News &amp; Activities</a></li>
+        <li><a href="https://mazedevelopment11.github.io/halabja-group/" data-i18n="ft_group">Halabja Group</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="year">2026</span> <b>Rasan</b> · <span data-i18n="ft_rights">Halabja Group. All rights reserved.</span></span>
+    <span data-i18n="ft_loc">Halabja, Kurdistan Region — Iraq</span>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
