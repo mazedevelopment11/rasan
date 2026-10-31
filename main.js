@@ -81,35 +81,81 @@
     io.unobserve(en.target);
   }), { threshold: 0.15 });
   $$('.fade-up').forEach(el => io.observe(el));
-  // Hero is always in view on load — reveal it without waiting for the observer
-  requestAnimationFrame(() => $$('#hero .fade-up').forEach(el => {
-    el.classList.add('visible'); $$('[data-count]', el).forEach(countUp); io.unobserve(el);
-  }));
-
-  /* ── Journey: draw the path as you scroll ── */
-  const stage = $('#journeyStage'), draw = $('#jDraw'), drop = $('#jDrop');
-  const stations = $$('.station', stage);
-  const len = draw.getTotalLength();
-  draw.style.strokeDasharray = len;
-  // Arc-length position of each station along the path
-  const stops = stations.map(st => {
-    const sx = parseFloat(st.style.left) / 100 * 1200, sy = parseFloat(st.style.top) / 100 * 420;
-    let best = 0, bd = Infinity;
-    for (let l = 0; l <= len; l += 4) {
-      const p = draw.getPointAtLength(l), d = (p.x - sx) ** 2 + (p.y - sy) ** 2;
-      if (d < bd) { bd = d; best = l; }
-    }
-    return best / len;
-  });
-  function onJourney() {
-    const r = stage.getBoundingClientRect();
-    const p = Math.max(0, Math.min(1, (innerHeight * 0.72 - r.top) / (r.height * 0.9)));
-    draw.style.strokeDashoffset = len * (1 - p);
-    const pt = draw.getPointAtLength(len * p);
-    drop.setAttribute('cx', pt.x); drop.setAttribute('cy', pt.y);
-    stage.style.setProperty('--p', p);
-    stations.forEach((st, i) => st.classList.toggle('on', p >= stops[i] - 0.02));
+  // The hero is revealed by the intro (or straight away when the intro is skipped)
+  function revealHero() {
+    $$('#hero .fade-up').forEach(el => {
+      el.classList.add('visible'); $$('[data-count]', el).forEach(countUp); io.unobserve(el);
+    });
   }
+
+  /* ── Intro: logo draws itself, the dot drops like milk, then the curtain lifts ── */
+  const intro = $('#intro');
+  let seen = false;
+  try { seen = sessionStorage.getItem('rasan-intro') === '1'; } catch (e) {}
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function endIntro() {
+    if (intro.classList.contains('lift')) return;
+    intro.classList.add('lift');
+    document.body.classList.remove('intro-on');
+    setTimeout(revealHero, 250);
+    setTimeout(() => intro.classList.add('gone'), 1000);
+    try { sessionStorage.setItem('rasan-intro', '1'); } catch (e) {}
+  }
+  async function playIntro() {
+    document.body.classList.add('intro-on');
+    intro.addEventListener('click', endIntro);
+    const src = await fetch('logos/rasan.svg?v=5').then(r => r.text());
+    const tmp = new DOMParser().parseFromString(src, 'image/svg+xml');
+    const paths = [...tmp.querySelectorAll('path')].filter(p => !p.closest('clipPath'));
+    const NS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '37 79 326 212');
+    const ku = document.createElementNS(NS, 'g'), dot = document.createElementNS(NS, 'g'), lat = document.createElementNS(NS, 'g');
+    ku.setAttribute('class', 'ku'); dot.setAttribute('class', 'dot'); lat.setAttribute('class', 'lat');
+    // Paths 0–4 are the Kurdish wordmark (3 is the round dot); 5+ are the Latin "Rasan"
+    paths.forEach((p, i) => {
+      const c = document.importNode(p, true);
+      c.removeAttribute('fill');
+      (i === 3 ? dot : i < 5 ? ku : lat).appendChild(c);
+    });
+    svg.append(ku, dot, lat);
+    $('#introLogo').appendChild(svg);
+    $$('path', ku).forEach(p => {
+      const L = p.getTotalLength();
+      p.style.strokeDasharray = L; p.style.strokeDashoffset = L;
+      p.getBoundingClientRect();
+      p.style.transition = 'stroke-dashoffset 1.1s ease-in-out';
+      p.style.strokeDashoffset = 0;
+    });
+    $$('path', lat).forEach((p, i) => { p.style.animationDelay = i * 70 + 'ms'; });
+    setTimeout(() => intro.classList.add('fill'), 100);
+    setTimeout(() => ku.classList.add('drawn'), 1000);
+    setTimeout(() => dot.classList.add('drop'), 1150);
+    setTimeout(() => lat.classList.add('show'), 1600);
+    setTimeout(endIntro, 2900);
+  }
+  if (seen || reduce) { intro.classList.add('gone'); requestAnimationFrame(revealHero); }
+  else playIntro().catch(endIntro);
+
+  /* ── Farm-to-kitchen story: steps follow the scroll ── */
+  const story = $('#story'), journey = $('#journey');
+  const frames = $$('.story-frame', story), texts = $$('.story-text', story), dots = $$('.story-dot', story);
+  const bar = $('#storyBar');
+  let current = -1;
+  function onJourney() {
+    const r = story.getBoundingClientRect();
+    const p = Math.max(0, Math.min(1, -r.top / (r.height - innerHeight)));
+    bar.style.width = (p * 100) + '%';
+    const step = Math.min(frames.length - 1, Math.floor(p * frames.length));
+    if (step === current) return;
+    current = step;
+    [frames, texts, dots].forEach(list => list.forEach((el, i) => el.classList.toggle('on', i === step)));
+    journey.classList.toggle('kitchen', step === frames.length - 1);
+  }
+  dots.forEach((d, i) => d.addEventListener('click', () => {
+    const top = story.getBoundingClientRect().top + scrollY;
+    scrollTo({ top: top + (story.offsetHeight - innerHeight) * (i + 0.5) / frames.length, behavior: 'smooth' });
+  }));
 
   /* ── Testimonials ── */
   const track = $('#voicesTrack');
