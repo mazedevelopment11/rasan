@@ -104,7 +104,7 @@
   async function playIntro() {
     document.body.classList.add('intro-on');
     intro.addEventListener('click', endIntro);
-    const src = await fetch('logos/rasan.svg?v=5').then(r => r.text());
+    const src = await fetch('logos/rasan.svg?v=6').then(r => r.text());
     const tmp = new DOMParser().parseFromString(src, 'image/svg+xml');
     const paths = [...tmp.querySelectorAll('path')].filter(p => !p.closest('clipPath'));
     const NS = 'http://www.w3.org/2000/svg';

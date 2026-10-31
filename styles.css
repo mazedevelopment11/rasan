@@ -610,3 +610,27 @@ body.intro-on { overflow: hidden; }
   .story-kitchen .k3 { right: 6%; top: 18%; width: 40%; }
 }
 .about-visual .hg-mark { position: relative; }
+
+/* ── Halabja Group badge: always pinned bottom-left (also in RTL) ── */
+.hg-badge {
+  position: fixed; left: 20px; bottom: 20px; z-index: 150;
+  display: flex; align-items: center; gap: 0; height: 52px; padding: 0 14px;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-radius: 6px; box-shadow: 0 10px 30px rgba(12,28,55,0.22);
+  text-decoration: none; color: var(--navy); direction: ltr;
+  transition: gap 0.3s, box-shadow 0.3s;
+}
+.hg-badge img { height: 30px; width: auto; }
+.hg-badge span {
+  max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+  transition: max-width 0.35s, opacity 0.3s;
+}
+.hg-badge:hover { gap: 10px; box-shadow: 0 14px 36px rgba(12,28,55,0.3); }
+.hg-badge:hover span { max-width: 160px; opacity: 1; }
+[lang="ku"] .hg-badge span, [lang="ar"] .hg-badge span { font-family: 'K24 Kurdish', var(--font); letter-spacing: 0; }
+@media (max-width: 640px) {
+  .hg-badge { left: 14px; bottom: 14px; height: 44px; padding: 0 11px; }
+  .hg-badge img { height: 24px; }
+}
+footer { padding-bottom: 96px; }
