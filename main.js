@@ -104,7 +104,7 @@
   async function playIntro() {
     document.body.classList.add('intro-on');
     intro.addEventListener('click', endIntro);
-    const src = await fetch('logos/rasan.svg?v=6').then(r => r.text());
+    const src = await fetch('logos/rasan.svg?v=7').then(r => r.text());
     const tmp = new DOMParser().parseFromString(src, 'image/svg+xml');
     const paths = [...tmp.querySelectorAll('path')].filter(p => !p.closest('clipPath'));
     const NS = 'http://www.w3.org/2000/svg';
@@ -137,25 +137,21 @@
   if (seen || reduce) { intro.classList.add('gone'); requestAnimationFrame(revealHero); }
   else playIntro().catch(endIntro);
 
-  /* ── Farm-to-kitchen story: steps follow the scroll ── */
-  const story = $('#story'), journey = $('#journey');
-  const frames = $$('.story-frame', story), texts = $$('.story-text', story), dots = $$('.story-dot', story);
-  const bar = $('#storyBar');
-  let current = -1;
+  /* ── Farm-to-table scene: the tanker drives along the road as you scroll ── */
+  const scene = $('#scene'), truck = $('#truck');
+  const stops = [40, 330, 600, 900, 1040];          // truck x at farm → kitchen
+  const stations = $$('.st', scene), steps = $$('.step');
   function onJourney() {
-    const r = story.getBoundingClientRect();
-    const p = Math.max(0, Math.min(1, -r.top / (r.height - innerHeight)));
-    bar.style.width = (p * 100) + '%';
-    const step = Math.min(frames.length - 1, Math.floor(p * frames.length));
-    if (step === current) return;
-    current = step;
-    [frames, texts, dots].forEach(list => list.forEach((el, i) => el.classList.toggle('on', i === step)));
-    journey.classList.toggle('kitchen', step === frames.length - 1);
+    const r = scene.getBoundingClientRect();
+    const p = Math.max(0, Math.min(1, (innerHeight * 0.85 - r.top) / (innerHeight * 0.75)));
+    const x = stops[0] + (stops[stops.length - 1] - stops[0]) * p;
+    truck.setAttribute('transform', `translate(${x} 0)`);
+    scene.style.setProperty('--roll', (x * 4) + 'deg');
+    // a station lights up once the truck reaches it (the farm is lit from the start)
+    const reached = [0, 0.27, 0.55, 0.96].filter(t => p >= t).length - 1;
+    stations.forEach((g, i) => g.classList.toggle('on', i <= reached));
+    steps.forEach((s, i) => s.classList.toggle('on', i === reached));
   }
-  dots.forEach((d, i) => d.addEventListener('click', () => {
-    const top = story.getBoundingClientRect().top + scrollY;
-    scrollTo({ top: top + (story.offsetHeight - innerHeight) * (i + 0.5) / frames.length, behavior: 'smooth' });
-  }));
 
   /* ── Testimonials ── */
   const track = $('#voicesTrack');
